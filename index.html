@@ -455,6 +455,20 @@
             color: #8bc34a;
         }
 
+        /* ========================================================== */
+        /* === АНИМАЦИЯ ПРИ ПРОКРУТКЕ (НОВОЕ) === */
+        /* ========================================================== */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* === АДАПТИВ === */
         @media (max-width: 650px) {
             .schedule-grid {
@@ -509,7 +523,7 @@
 
     <div class="container">
 
-        <!-- === ЗАГОЛОВОК === -->
+        <!-- === ЗАГОЛОВОК (всегда виден) === -->
         <div class="subtitle">We are getting married</div>
         <h1>
             Александр <span class="heart">♥</span> Анастасия
@@ -520,17 +534,17 @@
         <div class="divider"></div>
 
         <!-- === ВСТУПЛЕНИЕ === -->
-        <div class="invite-text">
+        <div class="invite-text fade-element">
             <div class="greeting">Дорогие гости!</div>
             <div>
                 Мы хотим разделить с вами самый важный день в нашей жизни и приглашаем вас на нашу свадьбу. Будем счастливы провести этот вечер с вами в тёплой и уютной атмосфере.
             </div>
         </div>
 
-        <div class="divider"></div>
+        <div class="divider fade-element"></div>
 
         <!-- === ТАЙМЕР === -->
-        <div class="timer" id="countdown">
+        <div class="timer fade-element" id="countdown">
             <div class="timer-item">
                 <span class="num" id="days">00</span>
                 <span class="label">Дней</span>
@@ -549,10 +563,10 @@
             </div>
         </div>
 
-        <div class="divider"></div>
+        <div class="divider fade-element"></div>
 
         <!-- === ПРОГРАММА ДНЯ === -->
-        <div class="block-card">
+        <div class="block-card fade-element">
             <h3>Программа дня</h3>
             <div class="schedule-grid">
                 <span class="time">— 16:30</span>
@@ -567,7 +581,7 @@
         </div>
 
         <!-- === ДЕТАЛИ === -->
-        <div class="block-card">
+        <div class="block-card fade-element">
             <h3>Детали</h3>
             <div class="details-list">
                 <div class="detail-item">
@@ -586,7 +600,7 @@
         </div>
 
         <!-- === ДРЕСС-КОД === -->
-        <div class="block-card">
+        <div class="block-card fade-element">
             <h3>Дресс-код</h3>
             <div class="dress-text">
                 Мы не хотим ограничивать вашу свободу, однако для создания единой картинки праздника мы предлагаем придерживаться вечернего дресс-кода. Было бы здорово, если в ваших образах преобладали <span class="highlight">пастельные оттенки</span>. Но главное — это ваше удобство и улыбка!
@@ -594,7 +608,7 @@
         </div>
 
         <!-- === КАЛЕНДАРЬ === -->
-        <div class="block-card calendar-block">
+        <div class="block-card calendar-block fade-element">
             <h3>📅 Сохраните дату</h3>
             <p>Добавьте нашу свадьбу в свой календарь, чтобы не забыть!</p>
             <div class="calendar-buttons">
@@ -620,7 +634,7 @@
         </div>
 
         <!-- === КАРТА === -->
-        <div class="map-wrapper">
+        <div class="map-wrapper fade-element">
             <iframe
             src="https://yandex.ru/map-widget/v1/?ll=39.889976%2C57.632289&mode=search&oid=1016990653&ol=biz&z=16.64"
             allowfullscreen="true">
@@ -632,47 +646,74 @@
         </div>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider fade-element"></div>
+<!-- === ФОРМА RSVP (БЕЗ ИКОНОК) === -->
+<div class="block-card rsvp fade-element">
+    <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
+    <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 400;">1 августа</strong></p>
 
-    <!-- === ФОРМА RSVP === -->
-    <div class="block-card rsvp">
-        <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
-        <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 400;">1 августа</strong></p>
+    <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
+        <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
+        <input type="hidden" name="_captcha" value="false" />
 
-        <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
-            <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
-            <input type="hidden" name="_captcha" value="false" />
+        <label for="name">Ваше имя (если парой — укажите оба)</label>
+        <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
 
-            <label for="name">Ваше имя (если парой — укажите оба)</label>
-            <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
+        <label for="email">Email для связи</label>
+        <input type="email" id="email" name="Email" placeholder="example@mail.ru" required />
 
-            <label for="email">Email для связи</label>
-            <input type="email" id="email" name="Email" placeholder="example@mail.ru" required />
+        <label for="status">Сможете ли вы присутствовать?</label>
+        <select id="status" name="Статус" required>
+            <option value="">Выберите вариант...</option>
+            <option value="С радостью приду!">С радостью приду!</option>
+            <option value="К сожалению, не смогу">К сожалению, не смогу</option>
+            <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
+        </select>
 
-            <label for="status">Сможете ли вы присутствовать?</label>
-            <select id="status" name="Статус" required>
-                <option value="">Выберите вариант...</option>
-                <option value="С радостью приду!">С радостью приду!</option>
-                <option value="К сожалению, не смогу">К сожалению, не смогу</option>
-                <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
-            </select>
+        <label for="dish">Предпочтения по горячему блюду</label>
+        <select id="dish" name="Блюдо">
+            <option value="Не выбрано">Не выбрано</option>
+            <option value="Мясо">Мясо</option>
+            <option value="Рыба">Рыба</option>
+        </select>
 
-            <label for="dish">Предпочтения по горячему блюду</label>
-            <select id="dish" name="Блюдо">
-                <option value="Не выбрано">Не выбрано</option>
-                <option value="Мясо">🥩 Мясо</option>
-                <option value="Рыба">🐟 Рыба</option>
-            </select>
+        <!-- === ВЫБОР АЛКОГОЛЯ (БЕЗ ИКОНОК) === -->
+        <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
+        <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Самогон" style="margin-right: 5px; transform: scale(1.1);"> Самогон
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Виски" style="margin-right: 5px; transform: scale(1.1);"> Виски
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Коньяк" style="margin-right: 5px; transform: scale(1.1);"> Коньяк
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Белое вино" style="margin-right: 5px; transform: scale(1.1);"> Белое вино
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Красное вино" style="margin-right: 5px; transform: scale(1.1);"> Красное вино
+            </label>
+        </div>
 
-            <button type="submit">Отправить ответ</button>
-        </form>
+        <button type="submit">Отправить ответ</button>
+    </form>
 
-        <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
-        <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
+    <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
+    <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
+</div>
+
+    <!-- === КОНТАКТЫ === -->
+    <div class="block-card contacts fade-element">
+        <h3>Контакты</h3>
+        <p style="color: #e8ddd0; margin-bottom: 8px; font-weight: 300;">В случае вопросов в день торжества, обращайтесь к нашему организатору</p>
+        <p style="font-size: 1.1rem;">📞 <a href="tel:+79806559021">+7 (980) 655-90-21</a></p>
+        <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 5px; font-weight: 300;">Александр</p>
     </div>
 
     <!-- === ПОДВАЛ === -->
-    <div class="footer">
+    <div class="footer fade-element">
         <p>С нетерпением ждём встречи! <span>♥</span></p>
         <p style="font-size: 0.75rem; margin-top: 8px; opacity: 0.6;">© 2026 Александр & Анастасия</p>
     </div>
@@ -684,7 +725,7 @@
     🔇
 </button>
 
-<!-- === ВАША МУЗЫКА (ЛОКАЛЬНЫЙ ФАЙЛ) === -->
+<!-- === АУДИОПЛЕЕР === -->
 <audio id="weddingMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
     Ваш браузер не поддерживает аудио.
@@ -756,7 +797,7 @@
     });
 
     // ============================================================
-    // 3. МУЗЫКА (ВАШ ЛОКАЛЬНЫЙ ФАЙЛ)
+    // 3. МУЗЫКА
     // ============================================================
     (function() {
         var audio = document.getElementById('weddingMusic');
@@ -799,6 +840,37 @@
             toggleBtn.classList.remove('playing');
         });
     })();
+
+    // ============================================================
+    // 4. АНИМАЦИЯ ПРИ ПРОКРУТКЕ (НОВОЕ)
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var elements = document.querySelectorAll('.fade-element');
+
+        // Функция проверки видимости
+        function checkVisibility() {
+            var windowHeight = window.innerHeight;
+            var triggerPoint = windowHeight * 0.85; // 85% от высоты экрана
+
+            elements.forEach(function(el) {
+                var rect = el.getBoundingClientRect();
+                var elementTop = rect.top;
+
+                if (elementTop < triggerPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Проверяем при загрузке
+        checkVisibility();
+
+        // Проверяем при прокрутке
+        window.addEventListener('scroll', checkVisibility);
+
+        // Проверяем при изменении размера окна
+        window.addEventListener('resize', checkVisibility);
+    });
 </script>
 
 </body>
