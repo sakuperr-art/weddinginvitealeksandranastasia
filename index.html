@@ -19,13 +19,25 @@
             text-align: center;
             padding: 20px;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
             position: relative;
-            background: url('background.jpg') no-repeat center center fixed;
+
+            /* === ФОТО БОЛЬШЕ НЕ ДВИГАЕТСЯ НА ТЕЛЕФОНАХ === */
+            background: url('background.jpg') no-repeat center center;
             background-size: cover;
+            background-attachment: scroll;
+        }
+
+        /* === ФИКС ДЛЯ IPHONE === */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                background-attachment: scroll;
+                min-height: -webkit-fill-available;
+            }
         }
 
         /* === ЗАТЕМНЕНИЕ === */
@@ -322,7 +334,7 @@
             text-decoration: underline;
         }
 
-        /* === ФОРМА === */
+        /* === ФОРМА (БЕЗ EMAIL) === */
         .rsvp label {
             display: block;
             text-align: left;
@@ -392,24 +404,6 @@
             font-weight: 300;
         }
 
-        /* === КОНТАКТЫ === */
-        .contacts {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 300;
-            color: #f5efe6;
-        }
-        .contacts a {
-            color: #f5efe6;
-            text-decoration: none;
-            font-weight: 400;
-            opacity: 0.8;
-        }
-        .contacts a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
         /* === ПОДВАЛ === */
         .footer {
             margin-top: 25px;
@@ -455,9 +449,7 @@
             color: #8bc34a;
         }
 
-        /* ========================================================== */
-        /* === АНИМАЦИЯ ПРИ ПРОКРУТКЕ (НОВОЕ) === */
-        /* ========================================================== */
+        /* === АНИМАЦИЯ ПРИ ПРОКРУТКЕ === */
         .fade-element {
             opacity: 0;
             transform: translateY(40px);
@@ -523,7 +515,7 @@
 
     <div class="container">
 
-        <!-- === ЗАГОЛОВОК (всегда виден) === -->
+        <!-- === ЗАГОЛОВОК === -->
         <div class="subtitle">We are getting married</div>
         <h1>
             Александр <span class="heart">♥</span> Анастасия
@@ -647,58 +639,59 @@
     </div>
 
     <div class="divider fade-element"></div>
-<!-- === ФОРМА RSVP (БЕЗ EMAIL) === -->
-<div class="block-card rsvp fade-element">
-    <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
-    <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 400;">1 августа</strong></p>
 
-    <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
-        <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
-        <input type="hidden" name="_captcha" value="false" />
+    <!-- === ФОРМА RSVP (БЕЗ EMAIL) === -->
+    <div class="block-card rsvp fade-element">
+        <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
+        <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 400;">1 августа</strong></p>
 
-        <label for="name">Ваше имя (если парой — укажите оба)</label>
-        <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
+        <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
+            <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
+            <input type="hidden" name="_captcha" value="false" />
 
-        <label for="status">Сможете ли вы присутствовать?</label>
-        <select id="status" name="Статус" required>
-            <option value="">Выберите вариант...</option>
-            <option value="С радостью приду!">С радостью приду!</option>
-            <option value="К сожалению, не смогу">К сожалению, не смогу</option>
-            <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
-        </select>
+            <label for="name">Ваше имя (если парой — укажите оба)</label>
+            <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
 
-        <label for="dish">Предпочтения по горячему блюду</label>
-        <select id="dish" name="Блюдо">
-            <option value="Не выбрано">Не выбрано</option>
-            <option value="Мясо">Мясо</option>
-            <option value="Рыба">Рыба</option>
-        </select>
+            <label for="status">Сможете ли вы присутствовать?</label>
+            <select id="status" name="Статус" required>
+                <option value="">Выберите вариант...</option>
+                <option value="С радостью приду!">С радостью приду!</option>
+                <option value="К сожалению, не смогу">К сожалению, не смогу</option>
+                <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
+            </select>
 
-        <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
-        <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
-            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                <input type="checkbox" name="Алкоголь" value="Самогон" style="margin-right: 5px; transform: scale(1.1);"> Самогон
-            </label>
-            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                <input type="checkbox" name="Алкоголь" value="Виски" style="margin-right: 5px; transform: scale(1.1);"> Виски
-            </label>
-            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                <input type="checkbox" name="Алкоголь" value="Коньяк" style="margin-right: 5px; transform: scale(1.1);"> Коньяк
-            </label>
-            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                <input type="checkbox" name="Алкоголь" value="Белое вино" style="margin-right: 5px; transform: scale(1.1);"> Белое вино
-            </label>
-            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                <input type="checkbox" name="Алкоголь" value="Красное вино" style="margin-right: 5px; transform: scale(1.1);"> Красное вино
-            </label>
-        </div>
+            <label for="dish">Предпочтения по горячему блюду</label>
+            <select id="dish" name="Блюдо">
+                <option value="Не выбрано">Не выбрано</option>
+                <option value="Мясо">Мясо</option>
+                <option value="Рыба">Рыба</option>
+            </select>
 
-        <button type="submit">Отправить ответ</button>
-    </form>
+            <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
+            <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
+                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                    <input type="checkbox" name="Алкоголь" value="Самогон" style="margin-right: 5px; transform: scale(1.1);"> Самогон
+                </label>
+                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                    <input type="checkbox" name="Алкоголь" value="Виски" style="margin-right: 5px; transform: scale(1.1);"> Виски
+                </label>
+                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                    <input type="checkbox" name="Алкоголь" value="Коньяк" style="margin-right: 5px; transform: scale(1.1);"> Коньяк
+                </label>
+                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                    <input type="checkbox" name="Алкоголь" value="Белое вино" style="margin-right: 5px; transform: scale(1.1);"> Белое вино
+                </label>
+                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                    <input type="checkbox" name="Алкоголь" value="Красное вино" style="margin-right: 5px; transform: scale(1.1);"> Красное вино
+                </label>
+            </div>
 
-    <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
-    <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
-</div>
+            <button type="submit">Отправить ответ</button>
+        </form>
+
+        <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
+        <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
+    </div>
 
     <!-- === ПОДВАЛ === -->
     <div class="footer fade-element">
@@ -762,10 +755,9 @@
     // ============================================================
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
         var name = document.getElementById('name').value.trim();
-        var email = document.getElementById('email').value.trim();
         var status = document.getElementById('status').value;
 
-        if (!name || !email || !status) {
+        if (!name || !status) {
             alert('Пожалуйста, заполните все обязательные поля.');
             e.preventDefault();
             return;
@@ -830,15 +822,14 @@
     })();
 
     // ============================================================
-    // 4. АНИМАЦИЯ ПРИ ПРОКРУТКЕ (НОВОЕ)
+    // 4. АНИМАЦИЯ ПРИ ПРОКРУТКЕ
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var elements = document.querySelectorAll('.fade-element');
 
-        // Функция проверки видимости
         function checkVisibility() {
             var windowHeight = window.innerHeight;
-            var triggerPoint = windowHeight * 0.85; // 85% от высоты экрана
+            var triggerPoint = windowHeight * 0.85;
 
             elements.forEach(function(el) {
                 var rect = el.getBoundingClientRect();
@@ -850,13 +841,8 @@
             });
         }
 
-        // Проверяем при загрузке
         checkVisibility();
-
-        // Проверяем при прокрутке
         window.addEventListener('scroll', checkVisibility);
-
-        // Проверяем при изменении размера окна
         window.addEventListener('resize', checkVisibility);
     });
 </script>
