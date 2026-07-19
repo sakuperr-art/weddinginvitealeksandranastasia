@@ -650,57 +650,60 @@
     <div class="divider fade-element"></div>
 
     <!-- === ФОРМА RSVP === -->
-    <div class="block-card rsvp fade-element">
-        <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
-        <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 700;">1 августа</strong></p>
+<div class="block-card rsvp fade-element">
+    <h3 style="margin-bottom: 5px;">Анкета гостя</h3>
+    <p style="color: #e8ddd0; margin-bottom: 15px; font-weight: 300;">Ваши ответы очень помогут нам при организации свадьбы. Ответьте до <strong style="color: #f5efe6; font-weight: 700;">1 августа</strong></p>
 
-        <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
-            <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
-            <input type="hidden" name="_captcha" value="false" />
+    <form id="rsvpForm" action="https://formspree.io/f/xbdngooe" method="POST">
+        <input type="hidden" name="_subject" value="Новый ответ на приглашение!" />
+        <input type="hidden" name="_captcha" value="false" />
 
-            <label for="name">Ваше имя (если парой — укажите оба)</label>
-            <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
+        <label for="name">Ваше имя (если парой — укажите оба)</label>
+        <input type="text" id="name" name="Имя" placeholder="Александр и Анастасия" required />
 
-            <label for="status">Сможете ли вы присутствовать?</label>
-            <select id="status" name="Статус" required>
-                <option value="">Выберите вариант...</option>
-                <option value="С радостью приду!">С радостью приду!</option>
-                <option value="К сожалению, не смогу">К сожалению, не смогу</option>
-                <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
-            </select>
+        <label for="status">Сможете ли вы присутствовать?</label>
+        <select id="status" name="Статус" required>
+            <option value="">Выберите вариант...</option>
+            <option value="С радостью приду!">С радостью приду!</option>
+            <option value="К сожалению, не смогу">К сожалению, не смогу</option>
+            <option value="Приду с гостем (+1)">Приду с гостем (+1)</option>
+        </select>
 
-            <label for="dish">Предпочтения по горячему блюду</label>
-            <select id="dish" name="Блюдо">
-                <option value="Не выбрано">Не выбрано</option>
-                <option value="Мясо">Мясо</option>
-                <option value="Рыба">Рыба</option>
-            </select>
+        <label>Предпочтения по горячему блюду (можно выбрать несколько)</label>
+        <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Блюдо" value="Мясо" style="margin-right: 5px; transform: scale(1.1);"> Мясо
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Блюдо" value="Рыба" style="margin-right: 5px; transform: scale(1.1);"> Рыба
+            </label>
+        </div>
 
-            <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
-            <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
-                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                    <input type="checkbox" name="Алкоголь" value="Самогон" style="margin-right: 5px; transform: scale(1.1);"> Самогон
-                </label>
-                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                    <input type="checkbox" name="Алкоголь" value="Виски" style="margin-right: 5px; transform: scale(1.1);"> Виски
-                </label>
-                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                    <input type="checkbox" name="Алкоголь" value="Коньяк" style="margin-right: 5px; transform: scale(1.1);"> Коньяк
-                </label>
-                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                    <input type="checkbox" name="Алкоголь" value="Белое вино" style="margin-right: 5px; transform: scale(1.1);"> Белое вино
-                </label>
-                <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
-                    <input type="checkbox" name="Алкоголь" value="Красное вино" style="margin-right: 5px; transform: scale(1.1);"> Красное вино
-                </label>
-            </div>
+        <label>Предпочтения по алкоголю (можно выбрать несколько)</label>
+        <div style="text-align: left; margin: 8px 0 12px 6px; color: #e8ddd0;">
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Самогон" style="margin-right: 5px; transform: scale(1.1);"> Самогон
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Виски" style="margin-right: 5px; transform: scale(1.1);"> Виски
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Коньяк" style="margin-right: 5px; transform: scale(1.1);"> Коньяк
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Белое вино" style="margin-right: 5px; transform: scale(1.1);"> Белое вино
+            </label>
+            <label style="display: inline-block; margin-right: 15px; font-weight: 300; font-size: 0.95rem;">
+                <input type="checkbox" name="Алкоголь" value="Красное вино" style="margin-right: 5px; transform: scale(1.1);"> Красное вино
+            </label>
+        </div>
 
-            <button type="submit">Отправить ответ</button>
-        </form>
+        <button type="submit">Отправить ответ</button>
+    </form>
 
-        <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
-        <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
-    </div>
+    <div class="success" id="rsvpSuccess">✅ Спасибо! Ваш ответ отправлен. Мы учтём все пожелания.</div>
+    <div class="error" id="rsvpError">❌ Что-то пошло не так. Попробуйте ещё раз или напишите нам лично.</div>
+</div>
 
     <!-- === ПОДВАЛ === -->
     <div class="footer fade-element">
