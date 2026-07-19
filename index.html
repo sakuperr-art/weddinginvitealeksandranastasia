@@ -25,16 +25,15 @@
             overflow-x: hidden;
             position: relative;
 
-            /* === ФОТО НЕ ДВИГАЕТСЯ НА ТЕЛЕФОНАХ === */
-            background: url('background.jpg') no-repeat center center;
+            /* === ФОТО ФИКСИРОВАНО (НЕ ДВИГАЕТСЯ) === */
+            background: url('background.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-attachment: scroll;
         }
 
         /* === ФИКС ДЛЯ IPHONE === */
         @supports (-webkit-touch-callout: none) {
             body {
-                background-attachment: scroll;
+                background-attachment: fixed;
                 min-height: -webkit-fill-available;
             }
         }
